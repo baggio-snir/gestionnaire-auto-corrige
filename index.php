@@ -21,6 +21,16 @@ $models = getModels();
     <head>
         <title>[ADMIN] Autos Management</title>
         <meta charset="utf8" />
+        <style type="text/css">
+            .warning {
+                font-weight: bold;
+                color: red;
+            }
+            
+            .warning:after {
+                content: " ⚠";
+            }
+        </style>
     </head>
     <body>
         <h1>Gestionnaire</h1>
@@ -33,13 +43,13 @@ $models = getModels();
                 <legend>Entrée d'un stock</legend>
                 <form method="post">
                     <p>
-                        <select name="brand">
+                        <select name="brand" required="required">
                             <option value="">- Marque -</option>
                             <?php foreach($models as $model) { ?>
                             <option value="<?php echo $model; ?>"><?php echo $model; ?></option>
                             <?php } ?>
                         </select>
-                        <select name="color">
+                        <select name="color" required="required">
                             <option value="">- Couleur -</option>
                             <?php foreach($colors as $color) { ?>
                             <option value="<?php echo $color; ?>"><?php echo $color; ?></option>
@@ -48,6 +58,7 @@ $models = getModels();
                         <input type="number"
                                name="price"
                                min="0"
+                               required="required"
                                placeholder="Prix d'achat" />
                         <input type="submit" name="addStock" value="Enregistrer" />
                     </p>
@@ -82,7 +93,7 @@ $models = getModels();
                 <legend>Entrée d'une vente</legend>
                 <form method="post">
                     <p>
-                        <select name="car">
+                        <select name="car" required="required">
                             <option value="">- Voiture -</option>
                             <?php foreach($stocks as $stock) { ?>
                             <option value="<?php echo $stock['id']; ?>"><?php echo $stock['model'].' - '.$stock['color'].' - '.$stock['price']; ?></option>
@@ -91,6 +102,7 @@ $models = getModels();
                         <input type="number"
                                name="price"
                                min="0"
+                               required="required"
                                placeholder="Prix de vente" />
                         <input type="submit" name="addSale" value="Enregistrer" />
                     </p>
@@ -106,12 +118,17 @@ $models = getModels();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($sales as $sale) { ?>
+                    <?php
+                        foreach($sales as $sale) {
+                            $diff = $sale['soldPrice'] - $sale['price'];
+                     ?>
                     <tr>
                         <th><?php echo $sale['soldDate']; ?></th>
                         <td><?php echo $sale['color']; ?></td>
                         <td><?php echo $sale['model']; ?></td>
-                        <td><?php echo $sale['soldPrice'] - $sale['price']; ?></td>
+                        <td class="<?php if($diff <= 0) { echo 'warning'; } ?>">
+                            <?php echo $diff; ?>
+                        </td>
                     </tr>
                     <?php } ?>
                 </tbody>
