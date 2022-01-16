@@ -11,6 +11,9 @@ if(!empty($_REQUEST['addSale'])) {
     // ajout vente
 }
 
+$stocks = getStocks();
+$sales = getSales();
+
 ?><!doctype html>
 <html>
     <head>
@@ -52,7 +55,17 @@ if(!empty($_REQUEST['addSale'])) {
                         <th>Date d'entrée</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <?php foreach($stocks as $stock) { ?>
+                    <tr>
+                        <th><?php echo $stock['id']; ?></th>
+                        <td><?php echo $stock['color']; ?></td>
+                        <td><?php echo $stock['model']; ?></td>
+                        <td><?php echo $stock['price']; ?></td>
+                        <td><?php echo $stock['entry']; ?></td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
             </table>
         </details>
         <details>
@@ -81,7 +94,16 @@ if(!empty($_REQUEST['addSale'])) {
                         <th>Bénéfice</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <?php foreach($sales as $sale) { ?>
+                    <tr>
+                        <th><?php echo $sale['soldDate']; ?></th>
+                        <td><?php echo $sale['color']; ?></td>
+                        <td><?php echo $sale['model']; ?></td>
+                        <td><?php echo $sale['soldPrice'] - $sale['price']; ?></td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
             </table>
         </details>
         <footer>
