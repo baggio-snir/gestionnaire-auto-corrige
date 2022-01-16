@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Accès limité"
+AuthUserFile /var/www/autos/.htpasswd
+Require valid-user
