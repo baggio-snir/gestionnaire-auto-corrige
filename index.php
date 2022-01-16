@@ -13,6 +13,8 @@ if(!empty($_REQUEST['addSale'])) {
 
 $stocks = getStocks();
 $sales = getSales();
+$colors = getColors();
+$models = getModels();
 
 ?><!doctype html>
 <html>
@@ -33,9 +35,15 @@ $sales = getSales();
                     <p>
                         <select name="brand">
                             <option value="">- Marque -</option>
+                            <?php foreach($models as $model) { ?>
+                            <option value="<?php echo $model; ?>"><?php echo $model; ?></option>
+                            <?php } ?>
                         </select>
                         <select name="color">
                             <option value="">- Couleur -</option>
+                            <?php foreach($colors as $color) { ?>
+                            <option value="<?php echo $color; ?>"><?php echo $color; ?></option>
+                            <?php } ?>
                         </select>
                         <input type="number"
                                name="price"
@@ -76,6 +84,9 @@ $sales = getSales();
                     <p>
                         <select name="car">
                             <option value="">- Voiture -</option>
+                            <?php foreach($stocks as $stock) { ?>
+                            <option value="<?php echo $stock['id']; ?>"><?php echo $stock['model'].' - '.$stock['color'].' - '.$stock['price']; ?></option>
+                            <?php } ?>
                         </select>
                         <input type="number"
                                name="price"
