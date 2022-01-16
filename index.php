@@ -4,11 +4,11 @@ define('SQLPWD', '');
 require_once('./db.php');
 
 if(!empty($_REQUEST['addStock'])) {
-    // ajout stock
+    addStock($_REQUEST['color'], $_REQUEST['brand'], $_REQUEST['price']);
 }
 
 if(!empty($_REQUEST['addSale'])) {
-    // ajout vente
+    sellCar($_REQUEST['car'], $_REQUEST['price']);
 }
 
 $stocks = getStocks();
