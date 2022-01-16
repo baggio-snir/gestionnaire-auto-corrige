@@ -24,6 +24,24 @@ if(!empty($_REQUEST['addSale'])) {
         </p>
         <details>
             <summary>Stocks</summary>
+            <fieldset>
+                <legend>Entrée d'un stock</legend>
+                <form method="post">
+                    <p>
+                        <select name="brand">
+                            <option value="">- Marque -</option>
+                        </select>
+                        <select name="color">
+                            <option value="">- Couleur -</option>
+                        </select>
+                        <input type="number"
+                               name="price"
+                               min="0"
+                               placeholder="Prix d'achat" />
+                        <input type="submit" name="addStock" value="Enregistrer" />
+                    </p>
+                </form>
+            </fieldset>
             <table>
                 <thead>
                     <tr>
@@ -39,6 +57,21 @@ if(!empty($_REQUEST['addSale'])) {
         </details>
         <details>
             <summary>Ventes</summary>
+            <fieldset>
+                <legend>Entrée d'une vente</legend>
+                <form method="post">
+                    <p>
+                        <select name="car">
+                            <option value="">- Voiture -</option>
+                        </select>
+                        <input type="number"
+                               name="price"
+                               min="0"
+                               placeholder="Prix de vente" />
+                        <input type="submit" name="addSale" value="Enregistrer" />
+                    </p>
+                </form>
+            </fieldset>
             <table>
                 <thead>
                     <tr>
